@@ -1,7 +1,6 @@
 import unittest
 
-from tests.HTMLTestRunner import HTMLTestRunner
-from tests.test_solution import TestLeastOperators
+from caiwei.tests.test_solution import TestLeastOperators
 
 if __name__ == '__main__':
     suite = unittest.TestSuite()

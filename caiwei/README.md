@@ -4,8 +4,8 @@
 
 这次实战学习了很多，主要有以下几个方面：
 
-1. `Python` 单元测试
-2. 算法(动态规划)
+1. 算法(动态规划)
+2. `Python` 单元测试
 
 通过实战过程，把自己的学习过程串起来，总结一下。
 
@@ -39,8 +39,8 @@ TDD三项法则：
 示例：
 
 ```
-输入：i = 7， v = 99
-输出：7 * 7 + 7 * 7 + 7/7
+    输入：i = 7， v = 99
+    输出：7 * 7 + 7 * 7 + 7/7
 ```
 
 思路：
@@ -103,11 +103,8 @@ class Solution:
 
 ```python
 import unittest
-
 from ddt import ddt, data, unpack
-
-from least_operators import Solution
-
+from caiwei.least_operators import Solution
 
 # 一个class继承了unittest.TestCase，便是一个测试用例
 @ddt
@@ -199,18 +196,16 @@ if __name__ == '__main__':
 ```python
 import unittest
 
-from tests.HTMLTestRunner import HTMLTestRunner
-from tests.test_solution import TestLeastOperators
+from caiwei.tests import HTMLTestRunner
+from caiwei.tests.test_solution import TestLeastOperators
 
 if __name__ == '__main__':
     suite = unittest.TestSuite()
-
     tests = [TestLeastOperators("test_func")]  # 添加测试用例列表
     # 添加一组测试用例
     suite.addTests(tests)
     # 添加一个测试用例
     suite.addTest(TestLeastOperators("test_func"))
-
     # loadTestsFromName()，传入'模块名.TestCase名'
     # 传入单个
     suite.addTests(unittest.TestLoader().loadTestsFromName("test_solution.TestLeastOperators"))
@@ -260,34 +255,35 @@ if __name__ == '__main__':
 
 **当我们想对一个功能使用多次测试数据时候**，这时候使用`DDT`来完成，DDT是 “Data-Driven Tests”的缩写。
 
-#### dd.ddt：
-
-装饰类，也就是继承自TestCase的类。
-
-#### ddt.data：
-
-装饰测试方法。参数是一系列的值。
-
-#### ddt.file_data：
-
-装饰测试方法。参数是文件名。文件可以是`json` 或者 `yaml`类型。
-
-注意，如果文件以`”.yml”`或者`”.yaml”`结尾，ddt会作为`yaml`类型处理，其他所有文件都会作为`json`文件处理。
-
-如果文件中是列表，每个列表的值会作为测试用例参数，同时作为测试用例方法名后缀显示。
-
-如果文件中是字典，字典的key会作为测试用例方法的后缀显示，字典的值会作为测试用例参数。
-
-#### ddt.unpack：
-
-传递的是复杂的数据结构时使用。比如使用元组或者列表，添加unpack之后，ddt会自动把元组或者列表对应到多个参数上。
+> #### dd.ddt：
+>
+> 装饰类，也就是继承自TestCase的类。
+>
+> #### ddt.data：
+>
+> 装饰测试方法。参数是一系列的值。
+>
+> #### ddt.file_data：
+>
+> 装饰测试方法。参数是文件名。文件可以是`json` 或者 `yaml`类型。
+>
+> 注意，如果文件以`”.yml”`或者`”.yaml”`结尾，ddt会作为`yaml`类型处理，其他所有文件都会作为`json`文件处理。
+>
+> 如果文件中是列表，每个列表的值会作为测试用例参数，同时作为测试用例方法名后缀显示。
+>
+> 如果文件中是字典，字典的key会作为测试用例方法的后缀显示，字典的值会作为测试用例参数。
+>
+> #### ddt.unpack：
+>
+> 传递的是复杂的数据结构时使用。比如使用元组或者列表，添加unpack之后，ddt会自动把元组或者列表对应到多个参数上。
+>
 
 直接举个用例子说明：
 
 ```python
 import unittest
 from ddt import ddt, data, unpack
-from least_operators import Solution
+from caiwei.least_operators import Solution
 
 
 @ddt # 1
@@ -353,6 +349,16 @@ class TestMathFunc(unittest.TestCase):
         result = eval(self.a.leastOpsExpressTarget(i, v))
         self.assertEqual(result, v, msg="预期结果错误") # 测试预期结果
 ```
+
+
+
+## 最后
+
+这次学到很多，代码不仅仅只是实现功能，还有考虑代码的鲁棒性，健壮性，这就需要通过测试才行。
+
+以上代码，GitHub地址：https://github.com/c940606/learning/tree/master
+
+
 
 参考链接：
 

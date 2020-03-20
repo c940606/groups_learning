@@ -2,7 +2,7 @@ import unittest
 
 from ddt import ddt, data, unpack,file_data
 
-from least_operators import Solution
+from caiwei.least_operators import Solution
 
 
 # 一个class继承了unittest.TestCase，便是一个测试用例
