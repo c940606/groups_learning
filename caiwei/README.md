@@ -67,7 +67,7 @@ class Solution:
         from functools import lru_cache
         import math
 
-        @lru_cache(None) # 记忆法
+        @lru_cache(None)
         def dfs(cur):
             # 当cur < x, 比如 cur = 2, x = 3, 需要判断使用 3/3 + 3/3 和 3 - 3/3,哪个用运算符最少
             if cur < x:
@@ -80,11 +80,11 @@ class Solution:
             p = int(math.log(cur, x))
             sums = x ** p
             # cur < sums 的情况,就是要加
-            ans = (str(x) + "*") * p
-            ans = ans[:-1] + "+" + dfs(cur - sums)
+            t = (str(x) + "*") * p
+            ans = t[:-1] + "+" + dfs(cur - sums)
             # sums > cur, 就是要减去多少才能到底目标值, 这个判断条件是有严格的数学证明的
             if sums * x - cur < cur:
-                ans = min(ans, ans + str(x) + "-" + dfs(sums * x - cur),
+                ans = min(ans, t + str(x) + "-" + dfs(sums * x - cur).translate(str.maketrans("+-", "-+")),
                           key=lambda s: sum(a in {"+", "-", "*", "/"} for a in s))
             return ans if ans[-1] not in {"+", "-"} else ans[:-1]
 
